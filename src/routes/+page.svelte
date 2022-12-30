@@ -13,8 +13,7 @@
 </div>
 
 <div class="my-4" />
-<div class="flex justify-center">
-	<div class="flex flex-wrap">
+	<div class="flex justify-center flex-wrap">
 		{#each data.stocks as stock}
 			<div class="bg-slate-600 rounded-lg mb-2 mr-2 p-2 w-36 ">
 				<div
@@ -54,4 +53,3 @@
 			</div>
 		{/each}
 	</div>
-</div>
