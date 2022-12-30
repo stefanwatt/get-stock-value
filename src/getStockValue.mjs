@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import cron from 'node-cron'
 import puppeteer from 'puppeteer'
 import { createClient } from 'redis'
 
@@ -35,26 +36,32 @@ const getStockValue = async (browser, stockUrl) => {
 
 const client = createClient()
 
-client.on('error', (err) => console.log('Redis Client Error', err))
+const main = async () => {
+	client.on('error', (err) => console.log('Redis Client Error', err))
 
-await client.connect()
+	await client.connect()
 
-const neededStocks = [
-	{ title: 'BioNTech', url: 'biontech-aktie' },
-	{ title: 'Bayer', url: 'bayer-aktie' },
-	{ title: 'VW VF', url: 'volkswagen_vz-aktie' }
-]
+	const neededStocks = [
+		{ title: 'BioNTech', url: 'biontech-aktie' },
+		{ title: 'Bayer', url: 'bayer-aktie' },
+		{ title: 'VW VF', url: 'volkswagen_vz-aktie' }
+	]
 
-const browser = await puppeteer.launch()
-const stocks = []
-for (const stock of neededStocks) {
-	stocks.push({
-		...stock,
-		...(await getStockValue(browser, stock.url))
-	})
+	const browser = await puppeteer.launch()
+	const stocks = []
+	for (const stock of neededStocks) {
+		stocks.push({
+			...stock,
+			...(await getStockValue(browser, stock.url))
+		})
+	}
+
+	await browser.close()
+	await client.set('stocks', JSON.stringify(stocks))
+
+	await client.disconnect()
 }
 
-await browser.close()
-await client.set('stocks', JSON.stringify(stocks))
-
-await client.disconnect()
+cron.schedule('*/15 * * * *', () => {
+	main()
+})
