@@ -16,7 +16,7 @@
 <div class="flex justify-center">
 	<div class="flex flex-wrap">
 		{#each data.stocks as stock}
-			<div class="bg-slate-600 rounded-lg mb-2 mr-2 p-2 w-48">
+			<div class="bg-slate-600 rounded-lg mb-2 mr-2 p-2 w-36 ">
 				<div
 					class="text-center"
 				>

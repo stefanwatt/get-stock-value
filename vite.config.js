@@ -6,9 +6,7 @@ const config = {
 	server: {
 		port: 3000,
 		fs: {
-			allow: [
-				'/home/stefan/get-stock-value/'
-			]
+			allow: ['/home/stefan/get-stock-value/']
 		}
 	}
 }
