@@ -30,6 +30,7 @@
 	"type": "module",
 	"dependencies": {
 		"@sveltejs/adapter-node": "^1.0.0",
+		"puppeteer": "^19.4.1",
 		"redis": "^4.5.1"
 	}
 }

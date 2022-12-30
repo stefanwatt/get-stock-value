@@ -23,32 +23,32 @@
 				</div>
 				<div class="justify-center flex items-center text-2xl font-bold text-sky-200">
 					<span class="ml-2">
-						{(stock.stockValue * stock.amount).toFixed(2)}€
+						{(stock.value * stock.amount).toFixed(2)}€
 					</span>
 				</div>
 				<div class="flex justify-center items-center text-sm">
 					<span class="ml-2">
-						<strong>{stock.amount}</strong> x {stock.stockValue}€
+						<strong>{stock.amount}</strong> x {stock.value}€
 					</span>
 				</div>
 				<div
-					class:text-red-400={stock.change < 0}
-					class:text-emerald-200={stock.change > 0}
+					class:text-red-400={stock.trend < 0}
+					class:text-emerald-200={stock.trend > 0}
 					class="text-sm flex justify-center"
 				>
 					<span>
-						{#if stock.change > 0}
+						{#if stock.trend > 0}
 							↗︎
 						{/if}
 
-						{#if stock.change < 0}
+						{#if stock.trend < 0}
 							↘︎
 						{/if}
 						<span class="mx-1" />
-						{stock.change} €</span
+						{stock.trend} €</span
 					>
 					<span class="mx-1" />
-					<span>{stock.changePercent}%</span>
+					<span>{stock.trendPercent}%</span>
 				</div>
 			</div>
 		{/each}
